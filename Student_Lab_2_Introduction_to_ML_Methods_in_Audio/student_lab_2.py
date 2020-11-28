@@ -127,7 +127,9 @@ ipd.Audio(signal_0[0], rate=sr)
 
 ipd.Audio(signal_1[0], rate=sr)
 
-"""Mix both signals together in a new array called 'audiomix':"""
+"""Mix both signals together in a new array called 'audiomix':
+
+"""
 
 #normalization
 audiomix = signal_0[0]/signal_0[0].max() + signal_1[0]/signal_1[0].max()
@@ -151,17 +153,19 @@ plt.figure(figsize=(20,8))
 
 #original
 plt.subplot(1,2,1)
-librosa.display.specshow(20*np.log10(X), sr=sr, x_axis='time', y_axis='log', cmap='viridis')
+librosa.display.specshow(20*np.log10(X+np.finfo(float).eps), sr=sr, x_axis='time', y_axis='log', cmap='viridis')
 plt.title('Original')
 plt.colorbar()
 
 #after NMF 
 plt.subplot(1,2,2)
-librosa.display.specshow(20*np.log10(np.dot(W,H)), sr=sr, x_axis='time', y_axis='log', cmap='viridis')
+librosa.display.specshow(20*np.log10(np.dot(W,H)+np.finfo(float).eps), sr=sr, x_axis='time', y_axis='log', cmap='viridis')
 plt.title('NMF')
 plt.colorbar();
 
-"""Represent the learned spectral patterns:"""
+"""Represent the learned spectral patterns:
+
+"""
 
 plt.figure(figsize=(20,8))
 for i in range(n_components):
